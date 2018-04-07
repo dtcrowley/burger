@@ -1,9 +1,74 @@
-<div class="jumbotron">
-  <h1 class="display-4">It's Burger Time!</h1>
-  <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-  <hr class="my-4">
-  <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-  <p class="lead">
-    <a class="btn btn-primary btn-lg" href="#" role="button">Add A New Burger!</a>
-  </p>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <div class="jumbotron jumbotron-fluid burger-title">
+                <div class="container">
+                    <h1 class="text-white">Eat the Burgers!</h1>
+                </div>
+            </div>
+            <img src="/assets/img/burger.png" alt="Burger">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card burger-list">
+                <div class="card-header text-center">
+                    <h2>List of Burgers</h2>
+                </div>
+                <div class="card-body">
+                    <ol>
+                        {{#each burgers}}
+                            {{#unless devoured}}
+                                <li class="burger">
+                                    {{burger_name}}
+
+                                    <button class="burg-eat" data-id='{{id}}'>DEVOUR!!!!</button>
+                                </li>
+                            {{/unless}}
+                        {{/each}}
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card burger-list">
+                <div class="card-header text-center">
+                    <h2>List of Devoured Burgers</h2>
+                </div>
+                <div class="card-body">
+                    <ol>
+                        {{#each burgers}}
+                            {{#if devoured}}
+                                <li>
+                                    {{burger_name}}
+                                </li>
+                            {{/if}}
+                        {{/each}}
+                    </ol>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card burger-form">
+                <div class="card-header text-center">
+                    <h2>Add a New Burger</h2>
+                </div>
+                <div class="card-body">
+                    <form class='create-burg text-center' method="POST" action="/api/burgers">
+
+                        <div class="form-group">
+                            <label for="burg">Burger Name</label>
+                            <input class="form-control" type="text" id="burg" name="name" aria-describedby="burger-note">
+                            <small id="burger-note" class="form-text text-muted">Fulfill your burger dreams!</small>
+                        </div>
+
+                        <button type="submit">Add Burger</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

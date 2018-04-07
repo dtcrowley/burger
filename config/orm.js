@@ -36,32 +36,32 @@ var orm = {
         })
     },
 
-    insertOne: function(table, cols, vals, cb) {
+    insertOne: function(table, columnName, values, cb) {
         var queryString = "INSERT INTO " + table;
 
         queryString += " (";
-        queryString += cols.toString();
+        queryString += columnName.toString();
         queryString += ") ";
         queryString += "VALUES (";
-        queryString += printQuestionMarks(vals.length);
+        queryString += printQuestionMarks(values.length);
         queryString += ") ";
 
-        connection.query(queryString, vals, function(err, result){
+        console.log(queryString);
+
+        connection.query(queryString, values, function(err, result){
             if (err) {
                 throw err;
             }
-
+            console.log(values);
             cb(result);
         });
     },
 
-    updateOne: function(table, objColVals, condition, cb) {
+    updateOne: function(table, condition, cb) {
         var queryString = "UPDATE" + table;
 
-        queryString += " SET ";
-        queryString += objToSql(objColVals);
-        queryString += " WHERE ";
-        queryString += condition;
+        queryString += " SET devoured = true";
+        queryString += " WHERE " + condition + ";"; 
 
         connection.query(queryString, function(err, results) {
             if (err) {
